@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -ex
+
+# This shouldn't be in the Dockerfile or containers built from the same image because they will have the same credentials.
+if [ ! -e "$HOME/.bitcoin/bitcoin.conf" ]; then
+  mkdir -p $HOME/.bitcoin
+
+  echo "Creating bitcoin.conf"
+
+  # Seed a random password for the JSON RPC server
+  cat <<EOF > $HOME/.bitcoin/bitcoin.conf
+printtoconsole=1
+rpcworkqueue=1000000000
+txindex=1
+rpcuser=bitcoinrpc
+rpcpassword=${RPCPASSWORD:-`dd if=/dev/urandom bs=33 count=1 2>/dev/null | base64`}
+EOF
+  #
+fi
+
+cat $HOME/.bitcoin/bitcoin.conf
+
+echo "Bitcoind initialized"

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "bcoin": "^0.15.0"
+  }
+}

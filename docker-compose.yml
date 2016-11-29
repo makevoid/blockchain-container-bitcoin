@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  bc:
+    build: .
+    volumes:
+      - /root/.bitcoin
+    ports:
+      - "8332"

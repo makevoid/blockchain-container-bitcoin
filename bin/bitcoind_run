@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -ex
+
+# set-up /root/.bitcoin/bitcoin.conf
+bitcoin_init
+
+exec bitcoind
